@@ -1,0 +1,62 @@
+n1 = int(input())
+matrix1 = []
+for i in range(n1):
+    matrix1.append(input())
+
+copy1 = matrix1.copy()
+for j in range(len(copy1)):
+    copy1[j] = copy1[j].lower()
+
+n2 = int(input())
+matrix2 = []
+for i in range(n2):
+    matrix2.append(input())
+
+def coppy(mas1, n):
+
+    mas2=[]
+    for i1 in range(n):
+        lst = []
+        mas2.append(lst)
+        for j1 in range(len(mas1[i1])):
+            mas2[i1].append('' + mas1[i1][j1])
+    return mas2
+
+
+matrix3 = []
+matrix4 = []
+
+for i in range(int(n2)):
+    a = matrix2[i].split()
+    matrix3.append(a)
+matrix4 = coppy(matrix3, n2)
+
+result = []
+b = []
+for i in range(int(n2)):
+    b.append(matrix4[i])
+for i in range(int(n2)):
+    for j in range(len(b[i])):
+        b[i][j] = b[i][j].lower()
+for i in range(int(n2)):
+    result.append(list(set(b[i]) - set(copy1)))
+
+result2 = []
+for i in range(n2):
+    result2 = list(set.union(set(result2), set(result[i])))
+
+index1 = []
+index2 = []
+k = 0
+for i in range(n2):
+    for h in range(len(result2)):
+        if result2[h] in b[i]:
+            index1.append(b[i].index(result2[h]))
+            index2.append(i)
+            b[i][index1[k]] = ''
+            k += 1
+
+c = []
+for i in range(len(index1)):
+    c.append((matrix3[index2[i]][index1[i]]).lower())
+print('\n'.join(list(set(c))))
